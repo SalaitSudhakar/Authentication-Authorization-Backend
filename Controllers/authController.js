@@ -115,14 +115,15 @@ export const login = async (req, res) => {
     });
 
     // Send the token in cookie and return the messages
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // convert 7days into milli seconds
+    });
+
     res
       .status(200)
-      .cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // convert 7days into milli seconds
-      })
       .json({ success: true, message: "User Loggedin successfully" });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
@@ -252,7 +253,7 @@ export const verifyEmail = async (req, res) => {
 
 // Check if a user is authenticated
 export const isAuthenticated = async (req, res) => {
-    res.status(200).json({ success: true, message: "User is authenticated" });
+  res.status(200).json({ success: true, message: "User is authenticated" });
 };
 
 // Send password reset OTP

@@ -11,11 +11,17 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-const allowedOrigins = ['https://mern-authentication-authorization-app.netlify.app'];
+const allowedOrigins = [
+  "https://mern-authentication-authorization-app.netlify.app"
+];
 
 app.use(express.json()); // parse the data from front end as json object
-app.use(cors({ origin: allowedOrigins, credentials: true })); // enables cors (cross origin resource sharing) in our express server. credentials: true used to allow cookie-parser
 app.use(cookieParser()); // enable cookie parser
+app.use(cors(
+  { origin: allowedOrigins, 
+    credentials: true 
+  })); // enables cors (cross origin resource sharing) in our express server. credentials: true used to allow cookie-parser
+
 
 //API endpoints
 app.get("/", (req, res) => {
