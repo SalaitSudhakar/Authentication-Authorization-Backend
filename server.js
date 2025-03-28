@@ -12,16 +12,22 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const allowedOrigins = [
-  "https://mern-authentication-authorization-app.netlify.app"
+  'https://mern-authentication-authorization-app.netlify.app'
 ];
 
 app.use(express.json()); // parse the data from front end as json object
 app.use(cookieParser()); // enable cookie parser
+
 app.use(cors(
   { origin: allowedOrigins, 
     credentials: true 
   })); // enables cors (cross origin resource sharing) in our express server. credentials: true used to allow cookie-parser
 
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', allowedOrigins[0]); // Ensure exact match
+    res.header('Access-Control-Allow-Credentials', 'true'); // Allow cookies
+    next();
+  });
 
 //API endpoints
 app.get("/", (req, res) => {
