@@ -252,7 +252,7 @@ export const verifyEmail = async (req, res) => {
 
 // Check if a user is authenticated
 export const isAuthenticated = async (req, res) => {
-    res.status(200).json({ success: success, message: "User is authenticated" });
+    res.status(200).json({ success: true, message: "User is authenticated" });
 };
 
 // Send password reset OTP
