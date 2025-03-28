@@ -65,7 +65,7 @@ export const register = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000, // convert 7days into milli seconds
       })
       .json({ success: true, message: "User Registerd Successfully" });
@@ -120,7 +120,7 @@ export const login = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000, // convert 7days into milli seconds
       })
       .json({ success: true, message: "User Loggedin successfully" });
