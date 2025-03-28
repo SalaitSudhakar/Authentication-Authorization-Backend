@@ -252,26 +252,7 @@ export const verifyEmail = async (req, res) => {
 
 // Check if a user is authenticated
 export const isAuthenticated = async (req, res) => {
-  try {
-    // Get userId and destructure it
-    const { userId } = req.body;
-
-    // Check for the user in database
-    const user = await User.findById(userId);
-
-    // if user not found, send message
-    if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
-    }
-
-    return res
-      .status(200)
-      .json({ success: true, message: "The account is valid" });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
+    res.status(200).json({ success: success, message: "User is authenticated" });
 };
 
 // Send password reset OTP
